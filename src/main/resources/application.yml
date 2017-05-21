@@ -1,0 +1,16 @@
+server:
+  port: 8123
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/junmeng
+    username: root
+    password: root
+  thymeleaf:
+    cache: false
+  devtools:
+    restart:
+      exclude: static/**,templates/** #某些资源的更新不用触发重启
+
+
+
