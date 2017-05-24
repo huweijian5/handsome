@@ -4,9 +4,8 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import org.springframework.http.HttpStatus
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer
+import org.springframework.boot.web.server.ErrorPage
 import org.springframework.context.annotation.Bean
-import org.springframework.boot.web.servlet.ErrorPage
 
 
 /**
@@ -27,7 +26,7 @@ open class HandsomeApplication {
      * 指定错误页
      * note:此处的可见性修饰符必须为open,不写默认是public final，而private或final都会导致编译报错
      */
-    @Bean
+   /* @Bean
     open  fun containerCustomizer(): EmbeddedServletContainerCustomizer {
         return EmbeddedServletContainerCustomizer { container ->
             val error401Page = ErrorPage(HttpStatus.UNAUTHORIZED, "/error/401")
@@ -36,7 +35,7 @@ open class HandsomeApplication {
             container.addErrorPages(error401Page, error404Page, error500Page)
 
         }
-    }
+    }*/
 
 
 }

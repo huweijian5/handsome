@@ -1,22 +1,29 @@
 package com.junmeng.handsome.entity
 
 import java.io.Serializable
+import java.util.*
 import javax.persistence.*
 
 /**
+ * 用户表
  * Created by hwj on 2017/5/21.
  */
 @Entity
 @Table(name = "tb_user")
 data class User(
-        @Column(name = "user_id") @Id @GeneratedValue(strategy = GenerationType.AUTO) var userId: Int? = 0,
-        @Column(name = "user_name", nullable = false) var userName: String? = null,
-        @Column(name = "nick_name", nullable = true) var nickName: String? = "junmeng",
-        @Column(name = "mobile_phone",nullable = true) var mobilePhone: String? = null
+        @Column(name = "user_id") @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var userId: Long? = null,
+        @Column(name = "user_name", nullable = false) var userName: String = "",
+        @Column(name = "nick_name", nullable = false) var nickName: String = "junmeng",
+        @Column(name = "mobile_phone", nullable = true) var mobilePhone: String? = null,
+        @Column(name = "email", nullable = true) var email: String? = null,
+        @Column(name = "password", nullable = false) var password: String = "123",
+        @Column(name = "status", nullable = false) var status: Int = 1,
+        @Column(name = "create_time", nullable = false) @Transient var createTime: Date = Date(),
+        @Column(name = "update_time", nullable = false) @Transient var updateTime: Date = Date()
 
 ) : Serializable {
 
     //空构造函数需要为每个参数提供默认值
-    protected constructor() : this(userId=0,userName = null,nickName = null,mobilePhone = null) {
-    }
+    //protected constructor() : this(userId=0,userName = null,nickName = null,mobilePhone = null) {
+    //}
 }

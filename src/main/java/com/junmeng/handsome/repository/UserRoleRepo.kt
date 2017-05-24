@@ -1,12 +1,12 @@
 package com.junmeng.handsome.repository
 
-import com.junmeng.handsome.entity.OperateRecord
+import com.junmeng.handsome.entity.UserRole
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 /**
- * Created by hwj on 2017/5/21.
+ * Created by hwj on 2017/5/22.
  */
 @Repository
-interface OperateRecordRepo : JpaRepository<OperateRecord,Int> {
+interface UserRoleRepo :JpaRepository<UserRole,Long>{
 }

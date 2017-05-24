@@ -1,6 +1,7 @@
 package com.junmeng.handsome.domain
 
 /**
+ * 接口统一返回结果
  * Created by hwj on 2017/5/21.
  */
 data  class Result<T>(

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest
 
 
 /**
+ * 异常处理器，捕获所有异常，并按照统一格式返回
  * Created by hwj on 2017/5/21.
  */
 @ControllerAdvice
@@ -18,7 +19,7 @@ class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(value = Exception::class)
     @ResponseBody
     fun  handle(request: HttpServletRequest, e: Exception): Result<Class<Exception>> {
-        //e.printStackTrace();
+        e.printStackTrace();
         if (e is BussinessException) {
             val ce = e
             return ResultUtil.error(ce.code, ce.message)

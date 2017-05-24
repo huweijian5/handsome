@@ -2,6 +2,7 @@ package com.junmeng.handsome.common
 
 
 /**
+ * 返回码枚举类型
  * Created by hwj on 2017/5/21.
  */
 enum class ResultCode(code: Int, message: String) {
