@@ -19,12 +19,12 @@ data class OperateLog(
         @Column(name = "target_url", nullable = false) var targetUrl: String = "",
         @Column(name = "query_param", nullable = false) var queryParam: String = "",
         @Column(name = "ip", nullable = false) var ip: String = "",
-        @Column(name = "ua", nullable = false) var ua: String = "",
-        @Column(name = "note", nullable = false) var note: String = "",
+        @Column(name = "user_agent", nullable = false) var userAgent: String = "",
+        @Column(name = "remark", nullable = false) var remark: String = "",
         @Column(name = "create_time", nullable = false) @Transient var createTime: Date = Date(),
         @Column(name = "update_time", nullable = false) @Transient var updateTime: Date = Date()
 ) : Serializable {
     protected constructor() : this(id = null, userId = 0, targetUrl = "", queryParam = "",
-            ip = "", ua = "", note = "", createTime = Date(), updateTime = Date()) {
+            ip = "", userAgent = "", remark = "", createTime = Date(), updateTime = Date()) {
     }
 }

@@ -1,9 +1,9 @@
 package com.junmeng.handsome.controller
 
-import com.junmeng.handsome.domain.Result
+import com.junmeng.handsome.domain.ApiResult
 import com.junmeng.handsome.entity.OperateLog
 import com.junmeng.handsome.repository.OperateLogRepo
-import com.junmeng.handsome.utils.ResultUtil
+import com.junmeng.handsome.utils.ApiResultUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.ui.ModelMap
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,17 +19,20 @@ open class IndexController {
     @Autowired
     var operateLogRepo: OperateLogRepo? = null
 
-    @GetMapping(value="/")
-    open fun index(model: ModelMap): ModelAndView {
+    @GetMapping(value= "/login")
+    open fun login(model: ModelMap): ModelAndView {
+         return ModelAndView("/login")
+    }
 
-         return ModelAndView("/index")
+    @GetMapping(value = "/log")
+    open fun log(): ApiResult<List<OperateLog>> {
+        var list: List<OperateLog>? = operateLogRepo?.findAll()
+        return ApiResultUtil.success(list)
     }
     @GetMapping(value = "/index")
-    open fun index1(): Result<List<OperateLog>> {
-        var list: List<OperateLog>? = operateLogRepo?.findAll()
-        // System.out.print("size=" + list?.get(0)?.operateType)
-        return ResultUtil.success(list)
-        // return ModelAndView("/index")
+    open fun index(): ModelAndView {
+        return ModelAndView("/index")
     }
+
 
 }

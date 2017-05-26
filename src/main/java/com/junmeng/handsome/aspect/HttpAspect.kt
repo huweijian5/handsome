@@ -23,7 +23,7 @@ class HttpAspect {
     val logger = org.slf4j.LoggerFactory.getLogger(this.javaClass)
 
     @Autowired
-    var operateLogRepo: OperateLogRepo?=null
+    var operateLogRepo: OperateLogRepo? = null
 
     // 定义切点Pointcut
     //表示Controller的所有方法
@@ -33,56 +33,24 @@ class HttpAspect {
 
     @Before("log()") //这种方法是减少重复的代码
     fun doBefore(joinPoint: JoinPoint) {
-        /*logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        val requestAttributes = RequestContextHolder.getRequestAttributes() as ServletRequestAttributes
-        val request = requestAttributes.request
-        logger.info("Method={}", request.method)
-        logger.info("RequestURI={}", request.requestURI)
-        logger.info("RequestURL={}", request.requestURL)
-        logger.info("PathInfo={}", request.pathInfo)
-        logger.info("ServletPath={}", request.servletPath)
-        logger.info("Protocol={}", request.protocol)
-
-        //请求参数
-        logger.info("QueryString= {}", request.queryString)
-        logger.info("RequestedSessionId={}", request.requestedSessionId)
-
-        logger.info("LocalAddr={}", request.localAddr)
-        logger.info("LocalName={}", request.localName)
-        logger.info("LocalPort={}", request.localPort)
-        logger.info("RemoteAddr={}", request.remoteAddr)
-        logger.info("RemoteHost={}", request.remoteHost)
-        logger.info("RemotePort={}", request.remotePort)
-
-        logger.info("ContextPath={}", request.contextPath)
-        logger.info("AuthType={}", request.authType)
-        logger.info("ContentType={}", request.contentType)
-        logger.info("CharacterEncoding={}", request.characterEncoding)
-
-        //类方法
-        logger.info("class_method={}", joinPoint.signature.declaringTypeName + "." + joinPoint.signature.name)
-
-        //参数
-        logger.info("args={}", joinPoint.args)*/
-        logger.info("===============================================================")
+        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     }
 
     //@After("execution(public * com.junmeng.controller.UserController.*(..))")
     @After("log()")
     fun doAfter(joinPoint: JoinPoint) {
-        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        logger.info("=================================================================>>>>>")
         val requestAttributes = RequestContextHolder.getRequestAttributes() as ServletRequestAttributes
         val request = requestAttributes.request
         logger.info("Method={}", request.method)
+        logger.info("CharacterEncoding={}", request.characterEncoding)
         logger.info("RequestURI={}", request.requestURI)
         logger.info("RequestURL={}", request.requestURL)
-        logger.info("PathInfo={}", request.pathInfo)
-        logger.info("ServletPath={}", request.servletPath)
         logger.info("Protocol={}", request.protocol)
+        logger.info("User-Agent={}", request.getHeader("User-Agent"))
 
         //请求参数
         logger.info("QueryString= {}", request.queryString)
-        logger.info("RequestedSessionId={}", request.requestedSessionId)
 
         logger.info("LocalAddr={}", request.localAddr)
         logger.info("LocalName={}", request.localName)
@@ -91,27 +59,28 @@ class HttpAspect {
         logger.info("RemoteHost={}", request.remoteHost)
         logger.info("RemotePort={}", request.remotePort)
 
-        logger.info("ContextPath={}", request.contextPath)
-        logger.info("AuthType={}", request.authType)
-        logger.info("ContentType={}", request.contentType)
-        logger.info("CharacterEncoding={}", request.characterEncoding)
+        //以下一般为空
+//        logger.info("ContextPath={}", request.contextPath)
+//        logger.info("AuthType={}", request.authType)
+//        logger.info("ContentType={}", request.contentType)
+//        logger.info("PathInfo={}", request.pathInfo)
+//        logger.info("ServletPath={}", request.servletPath)
+//        logger.info("RequestedSessionId={}", request.requestedSessionId)
 
         //类方法
         logger.info("class_method={}", joinPoint.signature.declaringTypeName + "." + joinPoint.signature.name)
 
         //参数
         logger.info("args={}", joinPoint.args)
-        logger.info("===============================================================")
-        var operateLog:OperateLog= OperateLog(ip=request.localAddr,note="ddd",queryParam = request.queryString?:"",targetUrl = request.requestURL.toString())
-//        operateLog.id=29
-//        operateLog.userId=0
-//        operateLog.ip=request.localAddr
-//        operateLog.note="ddd"
-//        operateLog.targetUrl=request.requestURL.toString()
-//        operateLog.queryParam= request.queryString?:""
-//        operateLog.ua = request.authType?:""
+        logger.info("<<<<<===============================================================")
 
-        operateLogRepo?.save(operateLog)
+        //保存请求记录到数据库中
+        operateLogRepo?.save(OperateLog(
+                ip = request.remoteHost + ":" + request.remotePort,
+                userAgent = request.getHeader("User-Agent") ?: "",
+                remark = "request",
+                queryParam = request.queryString ?: "",
+                targetUrl = request.requestURL.toString()))
     }
 
     /**

@@ -17,6 +17,7 @@ data class User(
         @Column(name = "mobile_phone", nullable = true) var mobilePhone: String? = null,
         @Column(name = "email", nullable = true) var email: String? = null,
         @Column(name = "password", nullable = false) var password: String = "123",
+        @Column(name = "is_admin", nullable = false) var isAdmin: Int = 0,
         @Column(name = "status", nullable = false) var status: Int = 1,
         @Column(name = "create_time", nullable = false) @Transient var createTime: Date = Date(),
         @Column(name = "update_time", nullable = false) @Transient var updateTime: Date = Date()
@@ -24,6 +25,7 @@ data class User(
 ) : Serializable {
 
     //空构造函数需要为每个参数提供默认值
-    //protected constructor() : this(userId=0,userName = null,nickName = null,mobilePhone = null) {
-    //}
+    // protected constructor() : this(userId=null,userName = "",nickName = "junmeng",mobilePhone = null,email=null,
+    //       password = "123",isAdmin = 0,status = 1,createTime = Date(),updateTime = Date()) {
+    // }
 }

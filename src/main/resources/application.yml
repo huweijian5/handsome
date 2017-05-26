@@ -21,4 +21,6 @@ spring:
 logging:
   level: debug
 
-
+devtools:
+    restart:
+      exclude: static/**,templates/** #某些资源的更新不用触发重启
