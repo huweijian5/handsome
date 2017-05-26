@@ -3,16 +3,18 @@
  */
 function login() {
 
-
-    alert("ddd")
+    var account = $("input[name=account]").val()
+    var password = $("input[name=password]").val()
     $.ajax({
         url: "/user/login",
         type: "post",
-        data: {"account": "admin", "password": "admin"},
+        data: {"account": account, "password": password},
         async: false,//是否异步
         success: function (data) {
             if (data.code == 1) {
                 alert("success:" + data.data.userId)
+                //跳转到首页
+                location.href="/index"
             } else {
                 alert("failed:" + data.message)
             }
@@ -24,15 +26,10 @@ function login() {
     });
 }
 
-$("#loginBtn").onClick = function () {
-    alert("dddsss")
-    login()
-
-}
 
 function onKeyDown(e) {
 
-    if(e.keyCode==13){
+    if (e.keyCode == 13) {
         alert("enter")
     }
 }
