@@ -6,7 +6,7 @@ function login() {
     var account = $("input[name=account]").val()
     var password = $("input[name=password]").val()
     $.ajax({
-        url: "/user/login",
+        url: "/api/user/login",
         type: "post",
         data: {"account": account, "password": password},
         async: false,//是否异步
