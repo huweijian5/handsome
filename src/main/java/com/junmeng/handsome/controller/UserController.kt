@@ -7,10 +7,12 @@ import com.junmeng.handsome.entity.User
 import com.junmeng.handsome.service.UserService
 import com.junmeng.handsome.utils.ApiResultUtil
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpSession
 
 /**
+ * 用户接口
  * Created by hwj on 2017/5/22.
  */
 @RestController
@@ -47,5 +49,17 @@ open class UserController {
         // 移除session
         session.removeAttribute(ConstantValue.LOGIN_SESSION)
         return ApiResultUtil.success()
+    }
+
+    /**
+     * 登出
+     */
+    @PostMapping(value = "/getUserList")
+    fun getUserList(
+            @RequestParam(value = "page", required = true) page: Int, //账号，可为用户名，手机号，邮箱
+            @RequestParam(value = "size", required = true) size: Int//md5加密过的密码
+    ): ApiResult<Page<User>> {
+
+        return ApiResultUtil.success(userService?.getUserList(page,size))
     }
 }

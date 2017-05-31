@@ -34,5 +34,10 @@ open class IndexController {
         return ModelAndView("/index")
     }
 
+    @GetMapping(value = "/user/list")
+    open fun gotoUserList(): ModelAndView {
+        return ModelAndView("/userMgr/list")
+    }
+
 
 }
