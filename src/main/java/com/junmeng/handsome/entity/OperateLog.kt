@@ -1,12 +1,17 @@
 package com.junmeng.handsome.entity
 
+import org.hibernate.annotations.Generated
+import org.hibernate.annotations.GenerationTime
 import java.io.Serializable
 import java.util.*
 import javax.persistence.*
 
 /**
  * 用户操作记录表
- * note:@Transient 忽略某个字段
+ * note:
+ * @Transient 忽略某个字段
+ * GenerationTime.INSERT 插入时自动更新时间
+ * GenerationTime.ALWAYS 更新时自动更新时间
  * 经测试，下面两个注解并无卵用，需要在yml中设置才有效
  * @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
  * Created by hwj on 2017/5/21.
@@ -21,8 +26,8 @@ data class OperateLog(
         @Column(name = "ip", nullable = false) var ip: String = "",
         @Column(name = "user_agent", nullable = false) var userAgent: String = "",
         @Column(name = "remark", nullable = false) var remark: String = "",
-        @Column(name = "create_time", nullable = false) @Transient var createTime: Date = Date(),
-        @Column(name = "update_time", nullable = false) @Transient var updateTime: Date = Date()
+        @Column(name = "create_time", nullable = false) @Generated(GenerationTime.INSERT) var createTime: Date = Date(),
+        @Column(name = "update_time", nullable = false) @Generated(GenerationTime.ALWAYS) var updateTime: Date = Date()
 ) : Serializable {
     protected constructor() : this(id = null, userId = 0, targetUrl = "", queryParam = "",
             ip = "", userAgent = "", remark = "", createTime = Date(), updateTime = Date()) {

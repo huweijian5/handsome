@@ -1,66 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Bootstrap -->
-    <link href="/common/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
-    <link href="/common/css/app.css" rel="stylesheet" media="screen"/>
-    <script src="/common/js/jquery-3.2.1.js"></script>
+    <link href="../static/common/css/bootstrap.min.css" th:href="@{/common/css/bootstrap.min.css}" rel="stylesheet"
+          media="screen"/>
+    <link href="../static/common/css/app.css" th:href="@{/common/css/app.css}" rel="stylesheet" media="screen"/>
+    <script src="../static/common/js/jquery-3.2.1.js" th:href="@{/common/js/jquery-3.2.1.js}"></script>
+
 </head>
 
 <body>
 
-
-<!--导航条-->
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">竣梦</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</div>
+<!-- 头部 这种写法，如果top_header中有多个header tag，则都引入进来 -->
+<header th:replace="/common/top_header :: header"></header>
 
 <div class="container-fluid">
 
-    <div class="col-sm-2 col-md-2 col-lg-2">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">用户管理 <span class="sr-only">(current)</span></a></li>
-                <li><a href="/user/list">用户列表</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">角色管理 <span class="sr-only">(current)</span></a></li>
-                <li><a href="">角色列表</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">权限管理 <span class="sr-only">(current)</span></a></li>
-                <li><a href="">权限列表</a></li>
-            </ul>
-        </div>
-    </div>
+    <!--左侧导航条-->
+    <div th:insert="/common/left_navigation"></div>
+
+    <!--内容区-->
     <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2">
 
-        <footer>
-            <p>Posted by: HWJ</p>
-            <p>Contact information: <a href="mailto:someone@example.com">junmeng@example.com</a>.</p>
-        </footer>
+        <!--底部-->
+        <!--以下四种写法效果都一致，但有微小差别-->
+        <!--<footer th:replace="/common/footer :: footer"></footer>-->
+        <!--不会保留div,而是直接替换掉-->
+        <!--div th:replace="/common/footer :: footer"></div>-->
+        <!--“copy”为th:fragment中的值-->
+        <div th:replace="/common/footer :: copy"></div>
+        <!--仍然保留div,即在内部插入（注意会将内容原封不动插入），与上面的replace不同-->
+        <!--<div th:insert="/common/footer"></div>-->
     </div>
 
 </div>

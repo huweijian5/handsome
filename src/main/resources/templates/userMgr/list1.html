@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Bootstrap -->
+    <link href="../../static/common/css/bootstrap.min.css" th:href="@{/common/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link href="../../static/common/css/app.css" th:href="@{/common/css/app.css}"  rel="stylesheet" media="screen"/>
+    <script src="../../static/common/js/jquery-3.2.1.js" th:src="@{/common/js/jquery-3.2.1.js}"></script>
+    <script src="../../static/userMgr/list.js" th:src="@{/userMgr/list.js}"></script>
+</head>
+
+<body>
+
+<!--头部-->
+<header th:replace="/common/top_header :: header"></header>
+<div class="container-fluid">
+
+    <!--左侧导航条-->
+    <div th:insert="/common/left_navigation"></div>
+
+    <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2" style="background-color: #1b6d85">
+
+
+        <table border="2">
+            <tr>
+                <td>用户id</td>
+                <td>用户名</td>
+                <td>用户昵称</td>
+                <td>手机号码</td>
+                <td>邮箱</td>
+                <td>是否管理员</td>
+                <td>状态</td>
+                <td>创建时间</td>
+                <td>更新时间</td>
+            </tr>
+
+            <!--/*@thymesVar id="userList" type="com.junmeng.handsome.entity.User"*/-->
+            <tr th:each="user : ${userList}">
+                <td th:text="*{user.userId}">用户id</td>
+                <td th:text="*{user.userName}">用户id</td>
+                <td th:text="*{user.nickName}">用户id</td>
+                <td th:text="*{user.mobilePhone}">用户id</td>
+                <td th:text="*{user.email}">用户id</td>
+                <td th:text="${user.admin}">用户id</td>
+                <td th:text="*{user.status}">用户id</td>
+                <td th:text="${#dates.format(user.createTime,'yyyy-MM-dd HH:mm:ss')}">yyyy-MM-dd HH:mm:ss</td>
+                <td th:text="${#dates.format(user.updateTime,'yyyy-MM-dd HH:mm:ss')}">yyyy-MM-dd HH:mm:ss</td>
+            </tr>
+        </table>
+
+        <footer th:replace="/common/footer :: footer"></footer>
+    </div>
+
+</div>
+</body>
+</html>

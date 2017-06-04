@@ -1,5 +1,8 @@
 package com.junmeng.handsome.entity
 
+import org.hibernate.annotations.Generated
+import org.hibernate.annotations.GenerationTime
+import org.springframework.format.annotation.DateTimeFormat
 import java.io.Serializable
 import java.util.*
 import javax.persistence.*
@@ -17,10 +20,10 @@ data class User(
         @Column(name = "mobile_phone", nullable = true) var mobilePhone: String? = null,
         @Column(name = "email", nullable = true) var email: String? = null,
         @Column(name = "password", nullable = false) var password: String = "123",
-        @Column(name = "is_admin", nullable = false) var isAdmin: Int = 0,
+        @Column(name = "is_admin", nullable = false) var admin: Int = 0,//thymeleaf不允许出现is
         @Column(name = "status", nullable = false) var status: Int = 1,
-        @Column(name = "create_time", nullable = false) @Transient var createTime: Date = Date(),
-        @Column(name = "update_time", nullable = false) @Transient var updateTime: Date = Date()
+        @Column(name = "create_time", nullable = false) @Generated(GenerationTime.INSERT) var createTime: Date = Date(),
+        @Column(name = "update_time", nullable = false) @Generated(GenerationTime.ALWAYS) var updateTime: Date = Date()
 
 ) : Serializable {
 

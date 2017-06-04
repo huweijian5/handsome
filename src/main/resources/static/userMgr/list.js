@@ -5,6 +5,9 @@ $(document).ready(function () {
     loadList()
 });
 
+var userList;
+var da="ddd"
+
 function loadList() {
     $.ajax({
         url: "/api/user/getUserList",
@@ -13,7 +16,8 @@ function loadList() {
         async: false,//是否异步
         success: function (data) {
             if (data.code == 1) {
-                alert("success:" + data.data.content[0].userName)
+                userList=data.data.content;
+                //alert("success:" + data.data.content[0].userName)
                 //跳转到首页
                 //location.href = "/index"
             } else {
