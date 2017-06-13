@@ -1,7 +1,9 @@
 package com.junmeng.handsome.service
 
-import com.junmeng.handsome.entity.OperateLog
-import com.junmeng.handsome.repository.OperateLogRepo
+import com.junmeng.handsome.entity.Access
+import com.junmeng.handsome.entity.Role
+import com.junmeng.handsome.repository.AccessRepo
+import com.junmeng.handsome.repository.RoleRepo
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
@@ -11,22 +13,24 @@ import org.springframework.stereotype.Service
 import javax.transaction.Transactional
 
 /**
- * Created by hwj on 2017/6/4.
+ * Created by hwj on 2017/6/13.
  */
 @Service
 @Transactional
-open class OperateLogService{
+open class RoleService {
     @Autowired
-    lateinit var operateLogRepo: OperateLogRepo
-
+    lateinit var roleRepo: RoleRepo
     /**
-     * 分页获得操作记录列表
+     * 分页获得权限列表
      */
-    open fun getLogs(page:Int,site:Int): Page<OperateLog> {
+    open fun getRoles(page:Int,site:Int): Page<Role> {
         var order: Sort.Order= Sort.Order.desc("updateTime")
         var sort: Sort = Sort.by(order)
         var page: Pageable = PageRequest.of(page,site,sort)
-        return operateLogRepo.findAll<Sort>(page)
+        return roleRepo.findAll<Sort>(page)
     }
 
+    fun  addOrUpdateRole(role: Role) {
+        roleRepo.save(role)
+    }
 }

@@ -21,7 +21,7 @@ open class UserController {
 
 
     @Autowired
-    open var userService: UserService? = null
+    lateinit var userService: UserService
 
     /**
      * 登录
@@ -32,7 +32,7 @@ open class UserController {
             @RequestParam(value = "account", required = true) account: String, //账号，可为用户名，手机号，邮箱
             @RequestParam(value = "password", required = true) password: String//md5加密过的密码
     ): ApiResult<LoginResult> {
-        var user: User = userService!!.login(account, password)
+        var user: User = userService.login(account, password)
         // 设置session
         session.setAttribute(ConstantValue.LOGIN_SESSION, account)
 
@@ -51,15 +51,24 @@ open class UserController {
         return ApiResultUtil.success()
     }
 
+    @PostMapping(value="/add")
+    fun addOne(
+            user:User
+    ): ApiResult<String>{
+        userService.addOrUpdateUser(user)
+        return ApiResultUtil.success()
+    }
+
+
     /**
-     * 登出
+     * 分页获取用户列表
      */
-    @PostMapping(value = "/getUserList")
+    @GetMapping(value = "/getUserList")
     fun getUserList(
             @RequestParam(value = "page", required = true) page: Int, //账号，可为用户名，手机号，邮箱
             @RequestParam(value = "size", required = true) size: Int//md5加密过的密码
     ): ApiResult<Page<User>> {
 
-        return ApiResultUtil.success(userService?.getUserList(page,size))
+        return ApiResultUtil.success(userService.getUserList(page,size))
     }
 }

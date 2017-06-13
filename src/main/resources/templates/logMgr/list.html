@@ -23,6 +23,7 @@
 
         <table border="2">
             <tr>
+                <td>序号</td>
                 <td>日志id</td>
                 <td>用户id</td>
                 <td>访问url</td>
@@ -37,15 +38,16 @@
 
             <!--/*@thymesVar id="logs" type="com.junmeng.handsome.entity.OperateLog"*/-->
             <tr th:each="log : ${logs}">
+                <td th:text="*{logStat.index}">序号</td>
                 <td th:text="*{log.id}">用户id</td>
                 <td th:text="*{log.userId}">用户id</td>
                 <td th:text="*{log.targetUrl}">用户id</td>
                 <td th:text="*{log.queryParam}">用户id</td>
                 <td th:text="*{log.ip}">用户id</td>
-                <td th:text="${log.userAgent}">用户id</td>
+                <td th:text="*{log.userAgent}">用户id</td>
                 <td th:text="*{log.remark}">用户id</td>
-                <td th:text="${#dates.format(log.createTime,'yyyy-MM-dd HH:mm:ss')}">yyyy-MM-dd HH:mm:ss</td>
-                <td th:text="${#dates.format(log.updateTime,'yyyy-MM-dd HH:mm:ss')}">yyyy-MM-dd HH:mm:ss</td>
+                <td th:text="*{#dates.format(log.createTime,'yyyy-MM-dd HH:mm:ss')}">yyyy-MM-dd HH:mm:ss</td>
+                <td th:text="*{#dates.format(log.updateTime,'yyyy-MM-dd HH:mm:ss')}">yyyy-MM-dd HH:mm:ss</td>
             </tr>
         </table>
 

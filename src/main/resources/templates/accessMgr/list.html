@@ -24,12 +24,9 @@
             <tr>
                 <td></td>
                 <td>序号</td>
-                <td>用户id</td>
-                <td>用户名</td>
-                <td>用户昵称</td>
-                <td>手机号码</td>
-                <td>邮箱</td>
-                <td>是否管理员</td>
+                <td>权限id</td>
+                <td>权限名称</td>
+                <td>权限url</td>
                 <td>状态</td>
                 <td>创建时间</td>
                 <td>更新时间</td>
@@ -37,20 +34,17 @@
             </tr>
 
             <!--/*@thymesVar id="userList" type="com.junmeng.handsome.entity.User"*/-->
-            <tr th:each="user: ${userList}">
+            <tr th:each="access: ${accessList}">
                 <td class="bs-checkbox ">
                     <input data-index="0" name="btSelectItem" type="checkbox" value="0">
                 </td>
-                <td th:text="${userStat.index}">序号</td>
-                <td th:text="${user.userId}">用户id</td>
-                <td th:text="${user.userName}">用户id</td>
-                <td th:text="${user.nickName}">用户id</td>
-                <td th:text="${user.mobilePhone}">用户id</td>
-                <td th:text="${user.email}">用户id</td>
-                <td th:text="${user.admin}">用户id</td>
-                <td th:text="${user.status}">用户id</td>
-                <td th:text="${#dates.format(user.createTime,'yyyy-MM-dd HH:mm:ss')}">yyyy-MM-dd HH:mm:ss</td>
-                <td th:text="${#dates.format(user.updateTime,'yyyy-MM-dd HH:mm:ss')}">yyyy-MM-dd HH:mm:ss</td>
+                <td th:text="${accessStat.index}">序号</td>
+                <td th:text="${access.accessId}">用户id</td>
+                <td th:text="${access.accessName}">用户id</td>
+                <td th:text="${access.urls}">用户id</td>
+                <td th:text="${access.status}">用户id</td>
+                <td th:text="${#dates.format(access.createTime,'yyyy-MM-dd HH:mm:ss')}">yyyy-MM-dd HH:mm:ss</td>
+                <td th:text="${#dates.format(access.updateTime,'yyyy-MM-dd HH:mm:ss')}">yyyy-MM-dd HH:mm:ss</td>
                 <td>
                     <button type="button" class="btn btn-primary">修改</button>
                     <button type="button" class="btn btn-primary">删除</button>

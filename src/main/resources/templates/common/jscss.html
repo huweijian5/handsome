@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="common_header(title,links)">
+    <title th:replace="${title}">这个超帅应用</title>
+
+    <!-- 常用样式脚本 -->
     <link href="../static/common/css/bootstrap.min.css" th:href="@{/common/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
     <script src="../static/common/js/jquery-3.2.1.js" th:href="@{/common/js/jquery-3.2.1.js}"></script>
+
+    <!--/* 每页占位符链接 */-->
+    <th:block th:replace="${links}" />
 </head>
+
 </html>
